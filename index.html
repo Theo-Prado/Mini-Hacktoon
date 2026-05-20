@@ -46,21 +46,6 @@
 
 <script>
 
-document.addEventListener('DOMContentLoaded', () => {
-
-  const button = document.getElementById('searchBtn');
-  const input = document.getElementById('username');
-
-  button.onclick = buscarUsuario;
-
-  input.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') {
-      buscarUsuario();
-    }
-  });
-
-});
-
 async function buscarUsuario() {
 
   const username = document.getElementById('username').value.trim();
@@ -159,6 +144,21 @@ function renderizarUsuario(user, repos) {
     </div>
   `;
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+
+  const button = document.getElementById('searchBtn');
+  const input = document.getElementById('username');
+
+  button.onclick = buscarUsuario;
+
+  input.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      buscarUsuario();
+    }
+  });
+
+});
 
 </script>
 
