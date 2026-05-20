@@ -1,9 +1,8 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
   <title>GitHub User Explorer</title>
 
   <script src="https://cdn.tailwindcss.com"></script>
@@ -27,7 +26,7 @@
       />
 
       <button
-        onclick="searchUser()"
+        id="searchBtn"
         class="bg-blue-600 px-6 py-4 rounded-xl hover:bg-blue-700 transition"
       >
         Pesquisar
@@ -35,7 +34,7 @@
 
     </div>
 
-    <div id="loading" class="hidden text-center text-xl">
+    <div id="loading" class="hidden text-center text-xl mb-8">
       Carregando...
     </div>
 
@@ -45,15 +44,25 @@
 
 <script>
 
+const searchBtn = document.getElementById('searchBtn');
+const usernameInput = document.getElementById('username');
+const loading = document.getElementById('loading');
+const content = document.getElementById('content');
+
+searchBtn.addEventListener('click', searchUser);
+
+usernameInput.addEventListener('keypress', function(event) {
+  if (event.key === 'Enter') {
+    searchUser();
+  }
+});
+
 async function searchUser() {
 
-  const username = document.getElementById('username').value.trim();
-
-  const loading = document.getElementById('loading');
-  const content = document.getElementById('content');
+  const username = usernameInput.value.trim();
 
   if (!username) {
-    alert('Digite um usuário');
+    alert('Digite um usuário do GitHub');
     return;
   }
 
@@ -63,9 +72,5 @@ async function searchUser() {
   try {
 
     const userResponse = await fetch(
-      `https://api.github.com/users/${username}`
-    );
-
-    if (!userResponse.ok) {
-      throw new Error('Usuário não encontrado');
+      'https://api.github.com/users/' + username
 </html>
